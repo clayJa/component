@@ -1,0 +1,325 @@
+
+.ant-dropdown-menu {
+  background-color: #2EA9E6;
+}
+
+.ant-dropdown-menu-item > a, .ant-dropdown-menu-submenu-title > a {
+  color: #fff;
+}
+
+.ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.ant-dropdown-menu-item {
+  color: #fff;
+}
+
+.user-info-progress.ant-dropdown-menu-item {
+  cursor: default;
+}
+
+.user-info-progress.ant-dropdown-menu-item:hover {
+  background-color: #2cb0e3;
+}
+
+.user-info-progress {
+  .text {
+    font-size: 12px;
+    line-height: 12px;
+    margin-top: 10px;
+  }
+  .ant-progress-inner {
+    background-color: rgba(0, 0, 0, 0.2);
+    .ant-progress-bg {
+      background-color: #fff;
+    }
+  }
+}
+
+// ant-input-number
+.ant-input-number-handler-wrap {
+  z-index: 99;
+}
+
+// table
+.ant-table {
+  font-size: 16px;
+  color: #858585;
+}
+
+.ant-table-fixed-header .ant-table-scroll .ant-table-header {
+  overflow-y: hidden;
+}
+
+.ant-table-fixed-header > .ant-table-content > .ant-table-scroll > .ant-table-body {
+  overflow-y: auto;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #fff;
+  // border-bottom: none;
+  color: #909699;
+  font-size 14px;
+  font-weight: 500;
+}
+
+.ant-table-tbody > tr:not(:last-child) > td {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.ant-table-tbody > tr:nth-child(even) {
+  // background-color: #f5fafe;
+}
+
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+  padding: 12px 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align:center;
+}
+
+table {
+  table-layout: fixed;
+}
+
+// pagination
+.ant-table-pagination.ant-pagination {
+  margin: 16px 0;
+  float: none;
+  text-align: center;
+}
+
+.ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
+  border: none;
+}
+
+.ant-pagination-item {
+  border: none;
+}
+
+.ant-pagination-options-quick-jumper input {
+  height: 30px;
+  width: 80px;
+  border-radius: 2px;
+}
+
+// button
+.ant-btn {
+  height: 35px;
+  border-radius: 4px;
+  font-size: 14px;
+  .modal-btn {
+    width: 106px
+  }
+  &.ant-btn-sm{
+    height 28px;
+    border-radius 3px;
+  }
+}
+
+.ant-btn-primary {
+    background-color: #2EA9E6;
+    border: none;
+  // 添加朴素按钮的样式
+  &.is-plain{
+    background #EAF6FC;
+    color: #2EA9E6;
+    border 1px solid #B1DEF4;
+  }
+  // &:hover, &:focus {
+  //   background-image: linear-gradient(to right, #2C8CEA 0%, #2CB7E1 100%);
+  // }
+}
+
+.ant-btn-info.ant-btn-default {
+  background-image: linear-gradient(to right, #0bb5d4 0%, #60dbfe 100%);
+  border: none;
+  color: #fff;
+  &:hover, &:focus {
+    color: #fff;
+    background-image: linear-gradient(to right, #0bb5d4 0%, #60dbfe 100%);
+  }
+}
+
+.ant-btn-danger{
+  color: #F56462;
+  background-color:rgba(253,239,239,1);
+  border-radius:3px;
+  border:1px solid rgba(251,202,202,1);
+  &:hover, &:focus {
+    color: #fff;
+    background-image: linear-gradient(to right, #df074e 0%, #fe6060 100%);
+  }
+}
+
+.ant-btn-success.ant-btn-default {
+  background-image: linear-gradient(to right, #0eb052 0%, #3bd57c 100%);
+  border: none;
+  color: #fff;
+  &:hover, &:focus {
+    color: #fff;
+    background-image: linear-gradient(to right, #0eb052 0%, #3bd57c 100%);
+  }
+}
+
+// .ant-btn-default {
+//   border: 1px solid #4BB5FF;
+//   color: #4BB5FF;
+// }
+
+// select
+.ant-select-selection--single {
+  background: #fff;
+  border: 1px solid #d8d8d8;
+}
+
+// input
+.ant-input, .ant-input-number {
+  background: #fff;
+  border: 1px solid #d8d8d8;
+  border-radius: 2px;
+  height: 36px;
+}
+
+.ant-select-selection {
+  border-radius: 2px;
+  height: 36px;
+}
+
+.ant-form label {
+  font-size: 16px;
+}
+
+.ant-upload.ant-upload-btn {
+  .ant-btn {
+    // height: 40px;
+    // background: #f9f9f9;
+    // border: 1px solid #f9f9f9;
+  }
+}
+
+// upload
+.ant-upload-list {
+  display: flex;
+  width: 100%;
+  // border: 1px dashed #999;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  .ant-upload-list-item {
+    margin-bottom: 8px;
+    .ant-upload-list-item-name {
+      padding-right: 10px;
+    }
+  }
+}
+
+// modal
+.ant-modal-header {
+  border-radius: 0;
+  border-bottom: 1px solid rgba(56, 149, 204, 0.4);
+}
+
+.ant-modal-content {
+  border-radius: 0;
+  .avatar-uploader .ant-upload.ant-upload-select-picture-card > .ant-upload{
+    width: 104px;
+    height: 104px;
+  }
+}
+
+.ant-modal-title {
+  border-left: 6px solid #2EA9E6;
+  padding-left: 10px;
+  font-size: 18px;
+  line-height: 22px;
+  color: #474747;
+  font-weight: normal;
+}
+
+// menu
+.ant-menu-vertical .ant-menu-item:after, .ant-menu-vertical-left .ant-menu-item:after, .ant-menu-vertical-right .ant-menu-item:after, .ant-menu-inline .ant-menu-item:after {
+  right: 278px;
+}
+
+// tab
+.ant-tabs-nav-container {
+  font-size: 16px;
+}
+
+.ant-tabs .ant-tabs-large-bar .ant-tabs-tab:hover {
+  background: #2EA9E6;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.ant-tabs-nav .ant-tabs-tab-active {
+  background: #2EA9E6;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.ant-tabs-ink-bar {
+  background: #2EA9E6;
+  // -webkit-background-clip: text;
+  // color: transparent;
+}
+
+// switch
+.ant-switch-checked {
+  background-color: #2EA9E6;
+}
+
+// radio
+.ant-radio-checked:after {
+  border: 1px solid #2EA9E6;
+}
+.ant-radio-checked .ant-radio-inner {
+  border-color: #2EA9E6;
+}
+.ant-radio-inner:after {
+  background-color: #2EA9E6;
+}
+
+
+// checkbox
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #2EA9E6;
+  border-color: #2EA9E6;
+}
+
+.ant-checkbox-indeterminate .ant-checkbox-inner:after {
+  background-color: #2EA9E6;
+}
+
+// tooltip
+.ant-tooltip-inner {
+  box-shadow:0px 2px 9px 0px rgba(30,48,99,0.32);
+}
+
+// calendar
+.ant-calendar-selected-date .ant-calendar-date, .ant-calendar-selected-start-date .ant-calendar-date, .ant-calendar-selected-end-date .ant-calendar-date {
+  background: #2EA9E6;
+  color: #fff!important;
+}
+
+.ant-calendar-today .ant-calendar-date {
+    border-color: #2EA9E6;
+    color: #2EA9E6;
+}
+
+a {
+  color: #4BB5FF;
+}
+
+a:hover {
+  color: #40a9ff;
+}
+
+a[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+  color: #bbb;
+  opacity: 0.5
+}
