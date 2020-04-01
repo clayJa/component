@@ -21,7 +21,7 @@
 </template>
 <script>
 import { Field } from 'vant';
-import { formatTime } from '@/utils/commonFunc';
+import { formatTime } from '@/utils/commonFuc';
 
 const { formatter, ...restProps } = Field.props;
 export default {
@@ -32,7 +32,7 @@ export default {
   name: 'SelfDateTime',
   model: {
     prop: 'value',
-    event: 'self-input', // 自定义方法，用来更新 model
+    event: 'input', // 自定义方法，用来更新 model
   },
   data() {
     return {
@@ -62,7 +62,7 @@ export default {
       const returnValue = formatTime(value, 'YYYY-MM-DD HH:mm');
       this.showDate = false;
       this.localVal = `${returnValue}`;
-      this.$emit('self-input', `${returnValue}:00`); // 更新 model
+      this.$emit('input', `${returnValue}:00`); // 更新 model
       this.$emit('self-date', value);
     },
   },
