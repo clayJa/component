@@ -7,6 +7,7 @@ import demo1 from './views/Three/demo1.vue';
 import test from './views/Test/demo1.vue';
 import d3 from './views/D3/index.vue';
 import SvgDemo from './views/SvgDemo/index.vue';
+import DynamicCreate from './views/mobile/DynamicCreate.vue';
 
 import NotFound from './views/ErrorPage/NotFound.vue';
 import InternetServerError from './views/ErrorPage/InternetServerError.vue';
@@ -54,6 +55,11 @@ const router = new Router({
       path: '/test',
       name: 'test',
       component: test,
+    },
+    {
+      path: '/dynamic-create',
+      name: 'DynamicCreate',
+      component: DynamicCreate,
     },
     {
       path: '/d3',

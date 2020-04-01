@@ -93,8 +93,8 @@ export const translateList = (list, mergeKey) => {
  */
 export const uniqueArr = (arr, field) => {
   const res = new Map();
-  return arr.filter((a) => !res.has(a[field]) && res.set(a[field], 1))
-}
+  return arr.filter(a => !res.has(a[field]) && res.set(a[field], 1));
+};
 /**
  * 保存而禁止内容到指定文件
  * @param data data
@@ -107,12 +107,12 @@ export const saveResponseAsBlobFile = function (res) {
     fileName = res.headers['content-disposition'];
   }
   // console.log(fileName);
-  if  (fileName) {
-    const temp =fileName.split('filename=');
+  if (fileName) {
+    const temp = fileName.split('filename=');
     if (temp && temp.length > 0) {
       try {
         fileName = decodeURIComponent(temp[1]);
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         fileName = temp[1];
       }
@@ -122,10 +122,10 @@ export const saveResponseAsBlobFile = function (res) {
   }
   // console.log(fileName);
   if (!fileName) {
-    fileName = "unknown";
+    fileName = 'unknown';
   }
   saveBlobFile(res.data, fileName);
-}
+};
 /**
  * 保存而禁止内容到指定文件
  * @param data data
@@ -133,11 +133,11 @@ export const saveResponseAsBlobFile = function (res) {
  */
 export const saveBlobFile = function (data, fileName) {
   const blob = new Blob([data]);
-  if ("download" in document.createElement("a")) {
+  if ('download' in document.createElement('a')) {
     // 非IE下载
-    const elink = document.createElement("a");
+    const elink = document.createElement('a');
     elink.download = fileName;
-    elink.style.display = "none";
+    elink.style.display = 'none';
     elink.href = window.URL.createObjectURL(blob);
     document.body.appendChild(elink);
     elink.click();
@@ -147,7 +147,7 @@ export const saveBlobFile = function (data, fileName) {
     // IE10+下载
     navigator.msSaveBlob(blob, fileName);
   }
-}
+};
 
 const fileTypeObj = {
   zip: 'application/zip',
@@ -172,48 +172,40 @@ export const downloadFile = (blobData, fileName, fileType) => {
   window.URL.revokeObjectURL(href); // 释放掉blob对象
 };
 
-export const downloadFileByLink = (fileUrl,fileName) => {
-  fetch(`${fileUrl}`).then((res) =>
-    res.blob().then((blob) => {
-      let a = document.createElement('a');
-      let url = window.URL.createObjectURL(blob);
-      let filename = fileName;
-      a.href = url;
-      a.download = filename;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    })
-  );
+export const downloadFileByLink = (fileUrl, fileName) => {
+  fetch(`${fileUrl}`).then(res => res.blob().then((blob) => {
+    const a = document.createElement('a');
+    const url = window.URL.createObjectURL(blob);
+    const filename = fileName;
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }));
 };
 
 export const computeHtmlText = (html) => {
-  let divElem = document.createElement('div');
+  const divElem = document.createElement('div');
   divElem.innerHTML = html;
   return divElem.innerText.length;
 };
 
 // 下划线转换驼峰
-export const toHump = (name) => {
-  return name.replace(/\_(\w)/g, function (all, letter) {
-    return letter.toUpperCase();
-  });
-}
+export const toHump = name => name.replace(/\_(\w)/g, (all, letter) => letter.toUpperCase());
 // 驼峰转换下划线
-export const toLine = (name) => {
-  return name.replace(/([A-Z])/g, "_$1").toLowerCase();
-}
+export const toLine = name => name.replace(/([A-Z])/g, '_$1').toLowerCase();
 export const isApp = () => {
   const ua = window.navigator.userAgent.toLowerCase();
   const isWeiXin = ua.match(/MicroMessenger/i) == 'micromessenger';
-  const isDingTalk = ua.match(/DingTalk/i)== 'dingtalk';
+  const isDingTalk = ua.match(/DingTalk/i) == 'dingtalk';
   return isWeiXin || isDingTalk;
-}
+};
 
 export const isDingTalk = () => {
   const ua = window.navigator.userAgent.toLowerCase();
-  return ua.match(/DingTalk/i)== 'dingtalk';
-}
+  return ua.match(/DingTalk/i) == 'dingtalk';
+};
 
-export const isTimeBefore = (time) => {
-  return moment().isBefore(moment(time));
-}
+export const isTimeBefore = time => moment().isBefore(moment(time));
+
+export const formatTime = (time, format) => time && moment(time).format(format);
