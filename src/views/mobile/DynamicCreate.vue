@@ -9,18 +9,16 @@ import SelfDateTime from '@/components/Form/SelfDateTime';
 import SelfPicker from '@/components/Form/SelfPicker';
 import SelfCheckBox from '@/components/Form/SelfCheckBox';
 import SelfSwitch from '@/components/Form/SelfSwitch';
+import SelfArea from '@/components/Form/SelfArea';
 import formCreate, { maker } from '@form-create/iview';
 import { rule } from './constant';
+import areaList from './city-mobile';
 
-formCreate.component('van-datetime-picker', DatetimePicker);
-formCreate.component('van-popup', Popup);
 formCreate.component('self-field', SelfDateTime);
 formCreate.component('self-picker', SelfPicker);
 formCreate.component('self-checkbox', SelfCheckBox);
 formCreate.component('self-switch', SelfSwitch);
-formCreate.component('van-picker', Picker);
-formCreate.component('van-radio', Radio);
-formCreate.component('van-radio-group', RadioGroup);
+formCreate.component('self-area', SelfArea);
 
 export default {
   name: 'DynamicCreate',
@@ -88,6 +86,18 @@ export default {
           emit: ['input', 'self-switch'],
           emitPrefix: 'switch',
         },
+        {
+          type: 'self-area',
+          field: 'self-area',
+          name: 'checkbox',
+          value: '',
+          props: {
+            label: '地址',
+            areaList,
+          },
+          emit: ['input', 'self-area'],
+          emitPrefix: 'area',
+        },
       ],
     };
   },
@@ -99,6 +109,7 @@ export default {
       this.fApi.on('picker-self-picker', this.timeFieldClick);
       this.fApi.on('checkbox-self-checkbox', this.timeFieldClick);
       this.fApi.on('switch-self-switch', this.timeFieldClick);
+      this.fApi.on('area-self-area', this.timeFieldClick);
     });
   },
   methods: {
