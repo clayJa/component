@@ -7,6 +7,8 @@
 import { DatetimePicker, Field, Picker, Radio, RadioGroup, Popup } from 'vant';
 import SelfDateTime from '@/components/Form/SelfDateTime';
 import SelfPicker from '@/components/Form/SelfPicker';
+import SelfCheckBox from '@/components/Form/SelfCheckBox';
+import SelfSwitch from '@/components/Form/SelfSwitch';
 import formCreate, { maker } from '@form-create/iview';
 import { rule } from './constant';
 
@@ -14,6 +16,8 @@ formCreate.component('van-datetime-picker', DatetimePicker);
 formCreate.component('van-popup', Popup);
 formCreate.component('self-field', SelfDateTime);
 formCreate.component('self-picker', SelfPicker);
+formCreate.component('self-checkbox', SelfCheckBox);
+formCreate.component('self-switch', SelfSwitch);
 formCreate.component('van-picker', Picker);
 formCreate.component('van-radio', Radio);
 formCreate.component('van-radio-group', RadioGroup);
@@ -58,22 +62,31 @@ export default {
           emitPrefix: 'picker',
         },
         {
-          type: 'van-field',
-          name: 'input',
+          type: 'self-checkbox',
+          field: 'self-checkbox',
+          name: 'checkbox',
+          value: '',
+          props: {
+            placeholder: '请选择区域',
+            label: '区域',
+            options: [
+              { name: '吴兴区', value: 1 },
+              { name: '安吉县', value: 2 },
+            ],
+          },
+          emit: ['input', 'self-checkbox'],
+          emitPrefix: 'checkbox',
         },
         {
-          type: 'van-picker',
-          name: 'picker',
-        },
-        {
-          type: 'van-radio-group',
-          name: 'radioGroup',
-          children: [
-            {
-              type: 'van-radio',
-              name: 'radio',
-            },
-          ],
+          type: 'self-switch',
+          field: 'self-switch',
+          name: 'checkbox',
+          value: '',
+          props: {
+            label: '状态',
+          },
+          emit: ['input', 'self-switch'],
+          emitPrefix: 'switch',
         },
       ],
     };
@@ -82,14 +95,10 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      // this.fApi.on('prefix1-selfInput',this.timeFieldClick);
-      // this.fApi.on('prefix1-selfClick',this.timeFieldClick);
-      // this.fApi.on('self-field-selfClick',this.timeFieldClick);
       this.fApi.on('datetime-self-date', this.timeFieldClick);
-      this.fApi.on('datetime-input', this.timeFieldClick);
-      this.fApi.on('picker-input', this.timeFieldClick);
       this.fApi.on('picker-self-picker', this.timeFieldClick);
-      // this.fApi.on('dateTimeField-selfClick',this.timeFieldClick);
+      this.fApi.on('checkbox-self-checkbox', this.timeFieldClick);
+      this.fApi.on('switch-self-switch', this.timeFieldClick);
     });
   },
   methods: {
