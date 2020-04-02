@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    '@vue/airbnb',
+    '@vue/standard',
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -16,6 +16,14 @@ module.exports = {
       "ExportDeclaration": { "multiline": true, "minProperties": 3 }
     }],
     'no-nested-ternary': 'off',
+    'import/extensions': [
+      'error',
+      {
+        '.js': 'never',
+        '.jsx': 'never',
+        '.vue': 'never',
+      },
+    ],
     'import/no-extraneous-dependencies': 'off'
   },
   parserOptions: {
