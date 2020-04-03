@@ -66,6 +66,9 @@ export default {
     areaList(val) {
       this.loading = false;
       this.areas = val;
+      if(this.active !== 0) {
+        this.v.splice(this.active - 1, 1, { ...this.v[this.active - 1],children: val });
+      }
     },
   },
   methods: {
@@ -83,7 +86,7 @@ export default {
         this.loading = true;
         this.areas = this.$emit('get-cascader-data',{ name: '', code: '', type: 1 })
       } else {
-        this.areas = this.v[index - 1].children
+        this.areas = this.v[index - 1].children;
       }
     },
     onClickCell(item) {

@@ -136,14 +136,27 @@ export default {
   },
   mounted() {
     this.$nextTick(()=>{
-                this.fApi.on('datetime-self-date',this.timeFieldClick);
-                this.fApi.on('picker-self-picker',this.timeFieldClick);
-                this.fApi.on('checkbox-self-checkbox',this.timeFieldClick);
-                this.fApi.on('switch-self-switch',this.timeFieldClick);
-                this.fApi.on('textarea-self-textarea',this.timeFieldClick);
-                this.fApi.on('area-self-area',this.timeFieldClick);
-                this.fApi.on('cascader-self-cascader',this.timeFieldClick);
-                this.fApi.on('cascader-get-cascader-data',this.getData);
+        const eventMap = {
+          'datetime-self-date': 'timeFieldClick',
+          'picker-self-picker': 'timeFieldClick',
+          'checkbox-self-checkbox': 'timeFieldClick',
+          'switch-self-switch': 'timeFieldClick',
+          'textarea-self-textarea': 'timeFieldClick',
+          'area-self-area': 'timeFieldClick',
+          'cascader-self-cascader': 'timeFieldClick',
+          'cascader-get-cascader-data': 'getData',
+        }
+        Object.keys(eventMap).forEach(key => {
+          this.fApi.on(key,this[eventMap[key]]);
+        })
+                // this.fApi.on('datetime-self-date',this.timeFieldClick);
+                // this.fApi.on('picker-self-picker',this.timeFieldClick);
+                // this.fApi.on('checkbox-self-checkbox',this.timeFieldClick);
+                // this.fApi.on('switch-self-switch',this.timeFieldClick);
+                // this.fApi.on('textarea-self-textarea',this.timeFieldClick);
+                // this.fApi.on('area-self-area',this.timeFieldClick);
+                // this.fApi.on('cascader-self-cascader',this.timeFieldClick);
+                // this.fApi.on('cascader-get-cascader-data',this.getData);
             })
   },
   methods: {
