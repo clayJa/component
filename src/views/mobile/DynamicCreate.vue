@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-import { DatetimePicker, Field, Picker, Radio, RadioGroup, Popup } from 'vant';
 import SelfDateTime from '@/components/Form/SelfDateTime';
 import SelfPicker from '@/components/Form/SelfPicker';
 import SelfCheckBox from '@/components/Form/SelfCheckBox';
@@ -12,14 +11,16 @@ import SelfSwitch from '@/components/Form/SelfSwitch';
 import SelfArea from '@/components/Form/SelfArea';
 import SelfCascader from '@/components/Form/SelfCascader';
 import SelfTextArea from '@/components/Form/SelfTextArea';
+import SelfField from '@/components/Form/SelfField';
 import formCreate, { maker }  from '@form-create/iview';
-formCreate.component('self-field', SelfDateTime);
+formCreate.component('self-datetime', SelfDateTime);
 formCreate.component('self-picker', SelfPicker);
 formCreate.component('self-checkbox', SelfCheckBox);
 formCreate.component('self-switch', SelfSwitch);
 formCreate.component('self-area', SelfArea);
 formCreate.component('self-cascader', SelfCascader);
 formCreate.component('self-textarea', SelfTextArea);
+formCreate.component('self-field', SelfField);
 import { rule } from './constant';
 import areaList from './city-mobile'
 export default {
@@ -34,8 +35,8 @@ export default {
       },
       rule: [
         {
-          type:'self-field',
-          field:'self-field',
+          type:'self-datetime',
+          field:'self-datetime',
           name: 'datetime',
           value: '',
           props: {
@@ -129,6 +130,24 @@ export default {
           emit: ['input','self-textarea'],
           emitPrefix:'textarea',
         },
+        {
+          type:'self-field',
+          field:'self-field',
+          name: 'textarea',
+          value: '',
+          props: {
+            'label': '手机号',
+            'placeholder': '请输入手机号',
+            'rules': [
+              { pattern: /(\+\d+)?1[3456789]\d{9}$/,trigger: 'onBlur',message: '手机号格式不正确！' },
+              { validator: this.asyncValidator, message: '请输入正确内容1' },
+              { validator: this.validator, message: '请输入正确内容2' },
+              { required: true, message: '请填写用户名' },
+            ]
+          },
+          emit: ['input','self-blur','self-field'],
+          emitPrefix:'phone',
+        },
       ]
     }
   },
@@ -149,6 +168,7 @@ export default {
         Object.keys(eventMap).forEach(key => {
           this.fApi.on(key,this[eventMap[key]]);
         })
+        // /(\+\d+)?1[3456789]\d{9}$/
                 // this.fApi.on('datetime-self-date',this.timeFieldClick);
                 // this.fApi.on('picker-self-picker',this.timeFieldClick);
                 // this.fApi.on('checkbox-self-checkbox',this.timeFieldClick);
@@ -162,6 +182,19 @@ export default {
   methods: {
     timeFieldClick(e) {
       console.log(e,2222222);
+    },
+    validator(val) {
+      return /1\d{10}/.test(val);
+    },
+    asyncValidator(val) {
+      return new Promise(resolve => {
+        this.$toast.loading('验证中...');
+
+        setTimeout(() => {
+          this.$toast.clear();
+          resolve(/\d{6}/.test(val));
+        }, 1000);
+      });
     },
     async getData(item) {
       const rule = this.fApi.getRule('self-cascader');
