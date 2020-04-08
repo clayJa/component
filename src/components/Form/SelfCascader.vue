@@ -11,13 +11,14 @@
     <van-popup v-model="showPicker" position="bottom" :lazy-render="true" :style="{height:'60%'}">
       <div class="area-picker">
         <div class="tabs van-hairline--bottom">
-            <span class="tab" :class="{ active: active === 0 }" @click="clickTab(0)">{{v[0] | title}}</span>
+            <!-- <span class="tab" :class="{ active: active === 0 }" @click="clickTab(0)">{{v[0] | title}}</span>
             <span class="tab" :class="{ active: active === 1 }" @click="clickTab(1)" v-show="v[1] || active === 1">{{v[1] | title}}</span>
             <span class="tab" :class="{ active: active === 2 }" @click="clickTab(2)" v-show="v[2] || active === 2">{{v[2] | title}}</span>
-            <span class="tab" :class="{ active: active === 3 }" @click="clickTab(3)" v-show="v[3] || active === 3">{{v[3] | title}}</span>
+            <span class="tab" :class="{ active: active === 3 }" @click="clickTab(3)" v-show="v[3] || active === 3">{{v[3] | title}}</span> -->
+            <span class="tab" v-for="(item,index) in selfLevel" :class="{ active: active === index }" @click="clickTab(index)" v-show="v[index] || active === index">{{v[index] | title}}</span>
         </div>
         <div class="container">
-          <van-cell clickable v-for="item in areas" :key="item.code" :title="item.name" @click="onClickCell(item)" />
+          <van-cell clickable v-for="item in areas" v-if="areas && areas.length > 0" :key="item.code" :title="item.name" @click="onClickCell(item)" />
         </div>
         <div class="loading" v-show="loading">
             <van-loading color="#1989fa"/>
@@ -33,6 +34,11 @@ export default {
     ...Field.props,
     value: Number | String,
     areaList: Array,
+    selfName: String,
+    selfLevel: {
+      type: Number,
+      default: 4
+    },
   },
   name: 'SelfCascader',
   model: {
@@ -47,7 +53,8 @@ export default {
       active: 0,
       loading: false,
       areas: this.areaList,
-      v: [null, null, null, null], // 省 市 县 街道
+      // v: [null, null, null, null], // 省 市 县 街道
+      v: new Array(this.selfLevel), // 省 市 县 街道
     };
   },
   filters: {
@@ -84,27 +91,33 @@ export default {
       this.areas = [];
       if(index === 0) {
         this.loading = true;
-        this.areas = this.$emit('get-cascader-data',{ name: '', code: '', type: 1 })
+        this.areas = this.$emit('get-cascader-data',{ name: '', code: '', type: 1,selfName: this.selfName })
       } else {
         this.areas = this.v[index - 1].children;
       }
     },
     onClickCell(item) {
-      if (this.active < 3) this.areas = [];
+      // if (this.active < 3) this.areas = [];
+      if (this.active < this.selfLevel - 1) this.areas = [];
       this.v.splice(this.active, 1, item);
-      for (let t = this.active + 1; t <= 3; t++) {
+      // for (let t = this.active + 1; t <= 3; t++) {
+      for (let t = this.active + 1; t <= this.selfLevel - 1; t++) {
         this.v[t] = null;
       }
 
-      if (!this.v[3]) {
+      // if (!this.v[3]) {
+      if (!this.v[this.selfLevel - 1]) {
         const type = this.getNodeType(item.code);
         this.loading = true;
-        this.$emit('get-cascader-data',{ ...item, type });
+        this.$emit('get-cascader-data',{ ...item, type, selfName: this.selfName });
       } else {
+        console.log(this.v,'this.v')
         this.$emit('input', this.v.map((item) => item.name).join('/'));
         this.$emit('self-cascader', this.v);
+        this.showPicker = false;
       }
-      if (this.active < 3) this.active = this.active + 1;
+      // if (this.active < 3) this.active = this.active + 1;
+      if (this.active < this.selfLevel - 1) this.active = this.active + 1;
     },
     getNodeType(code) {
       const length = code.length || 0;

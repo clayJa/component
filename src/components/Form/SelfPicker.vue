@@ -8,7 +8,7 @@
       input-align="right"
       @click="showPicker = true"
     />
-    <van-popup :value="showPicker" position="bottom">
+    <van-popup v-model="showPicker" position="bottom">
       <van-picker
         show-toolbar
         :value-key="typeof options[0] === 'object' ? 'name' : null"
