@@ -8,7 +8,7 @@
       input-align="right"
       @click="showDate = true"
     />
-    <van-popup :value="showDate" position="bottom">
+    <van-popup v-model="showDate" position="bottom">
       <van-datetime-picker
         :formatter="formatter"
         @confirm="onDataConfirm"

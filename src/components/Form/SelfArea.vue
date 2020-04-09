@@ -8,7 +8,7 @@
       input-align="right"
       @click="showPicker = true"
     />
-    <van-popup :value="showPicker" position="bottom">
+    <van-popup v-model="showPicker" position="bottom">
       <van-area
         :area-list="areaList"
         @confirm="onDataConfirm"

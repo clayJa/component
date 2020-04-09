@@ -9,7 +9,6 @@
 </template>
 <script>
 import { Field } from 'vant';
-
 export default {
   props: {
     ...Field.props,
@@ -17,9 +16,9 @@ export default {
     options: Array,
   },
   name: 'SelfCheckBox',
-  model: {
+  model:{
     prop: 'value',
-    event: 'input', // 自定义方法，用来更新 model
+    event: 'input'  // 自定义方法，用来更新 model
   },
   data() {
     return {
@@ -27,15 +26,15 @@ export default {
     };
   },
   watch: {
-    value(val) {
+    value(val){
       this.localVal = val.split(',').filter(Boolean).map(Number);
-    },
+    }
   },
-  methods: {
+  methods:{
     onDataChange(value) {
       this.localVal = value;
-      this.$emit('input', value.join(',')); // 更新 model
-      this.$emit('self-checkbox', value);
+      this.$emit('input',value.join(',')); // 更新 model
+      this.$emit('self-checkbox',value);
     },
   },
 };
@@ -43,6 +42,7 @@ export default {
 <style lang="stylus" scoped>
   >>> .van-checkbox {
     /* align-items: flex-start; */
+    margin-bottom: 6px;
   }
   >>> .van-checkbox__icon--checked .van-icon {
     color: rgb(79,152,255);
