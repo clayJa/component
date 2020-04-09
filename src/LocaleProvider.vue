@@ -5,17 +5,17 @@
 </template>
 
 <script>
-import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
-import App from './App.vue';
+import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import App from './App.vue'
 
 export default {
-  data() {
+  data () {
     return {
-      locale: zhCN,
-    };
+      locale: zhCN
+    }
   },
   components: {
-    App,
-  },
-};
+    App
+  }
+}
 </script>

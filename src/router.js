@@ -1,22 +1,23 @@
 /* eslint-disable no-unused-expressions */
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 
-import ComponentList from './views/ComponentList/index.vue';
-import demo1 from './views/Three/demo1.vue';
-import test from './views/Test/demo1.vue';
-import d3 from './views/D3/index.vue';
-import SvgDemo from './views/SvgDemo/index.vue';
-import DynamicCreate from './views/mobile/DynamicCreate.vue';
+import ComponentList from './views/ComponentList/index.vue'
+import demo1 from './views/Three/demo1.vue'
+import test from './views/Test/demo1.vue'
+import d3 from './views/D3/index.vue'
+import SvgDemo from './views/SvgDemo/index.vue'
+import DynamicCreate from './views/mobile/DynamicCreate.vue'
+import Table from './views/Admin/Table.vue'
 
-import NotFound from './views/ErrorPage/NotFound.vue';
-import InternetServerError from './views/ErrorPage/InternetServerError.vue';
-import NotAccessed from './views/ErrorPage/NotAccessed.vue';
+import NotFound from './views/ErrorPage/NotFound.vue'
+import InternetServerError from './views/ErrorPage/InternetServerError.vue'
+import NotAccessed from './views/ErrorPage/NotAccessed.vue'
 
-import { getQuery } from './utils/commonFunc';
-import config from './utils/config';
+import { getQuery } from './utils/commonFunc'
+import config from './utils/config'
 
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
@@ -24,55 +25,60 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/ComponentList',
+      redirect: '/ComponentList'
     },
     {
       path: '/404',
       name: 'NotFound',
-      component: NotFound,
+      component: NotFound
     },
     {
       path: '/401',
       name: 'NotAccessed',
-      component: NotAccessed,
+      component: NotAccessed
     },
     {
       path: '/500',
       name: 'InternetServerError',
-      component: InternetServerError,
+      component: InternetServerError
     },
     {
       path: '/ComponentList',
       name: 'TopHeader',
-      component: ComponentList,
+      component: ComponentList
     },
     {
       path: '/demo1',
       name: 'demo1',
-      component: demo1,
+      component: demo1
     },
     {
       path: '/test',
       name: 'test',
-      component: test,
+      component: test
     },
     {
       path: '/dynamic-create',
       name: 'DynamicCreate',
-      component: DynamicCreate,
+      component: DynamicCreate
     },
     {
       path: '/d3',
       name: 'd3',
-      component: d3,
+      component: d3
     },
     {
       path: '/SvgDemo',
       name: 'SvgDemo',
-      component: SvgDemo,
+      component: SvgDemo
     },
-  ],
-});
+    {
+      path: '/Table',
+      name: 'Table',
+      component: Table
+    }
+  ]
+})
 
 // router.beforeEach((to, from, next) => {
 //   const accessToken = getQuery('access_token');
@@ -93,4 +99,4 @@ const router = new Router({
 //   }
 // });
 
-export default router;
+export default router
