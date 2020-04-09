@@ -20,51 +20,51 @@
   </div>
 </template>
 <script>
-import { Field } from 'vant';
-import { formatTime } from '@/utils/commonFuc';
+import { Field } from 'vant'
+import { formatTime } from '@/utils/commonFunc'
 
-const { formatter, ...restProps } = Field.props;
+const { formatter, ...restProps } = Field.props
 export default {
   props: {
     ...restProps,
-    value: Number | String,
+    value: Number | String
   },
   name: 'SelfDateTime',
   model: {
     prop: 'value',
-    event: 'input', // 自定义方法，用来更新 model
+    event: 'input' // 自定义方法，用来更新 model
   },
-  data() {
+  data () {
     return {
       localVal: this.value,
       showDate: false,
-      localDate: new Date(),
-    };
+      localDate: new Date()
+    }
   },
   watch: {
-    value(val) {
-      console.log(val);
-      this.localVal = val;
-    },
+    value (val) {
+      console.log(val)
+      this.localVal = val
+    }
   },
   methods: {
-    formatter(type, val) {
+    formatter (type, val) {
       const map = {
         year: '年',
         month: '月',
         day: '日',
         hour: '时',
-        minute: '分',
-      };
-      return `${val}${map[type]}`;
+        minute: '分'
+      }
+      return `${val}${map[type]}`
     },
-    onDataConfirm(value) {
-      const returnValue = formatTime(value, 'YYYY-MM-DD HH:mm');
-      this.showDate = false;
-      this.localVal = `${returnValue}`;
-      this.$emit('input', `${returnValue}:00`); // 更新 model
-      this.$emit('self-date', value);
-    },
-  },
-};
+    onDataConfirm (value) {
+      const returnValue = formatTime(value, 'YYYY-MM-DD HH:mm')
+      this.showDate = false
+      this.localVal = `${returnValue}`
+      this.$emit('input', `${returnValue}:00`) // 更新 model
+      this.$emit('self-date', value)
+    }
+  }
+}
 </script>
