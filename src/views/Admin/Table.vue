@@ -1,11 +1,22 @@
 <template>
   <div class="wrapper">
-    <SelfTable :options="options" :data="tableData" @fetchData="fetchData">
+    <SelfTable
+      :options="options"
+      :data="tableData"
+      @tableChange="fetchData"
+      :expandRowByClick="true"
+      :rowSelection="{selectedRowKeys: selectedRowKeys, onSelect: onSelectChange,onSelectAll: onSelectAllChange}"
+    >
       <template slot="action" slot-scope="text,record">
         <a
           type="primary"
           @click="handleClick(record)"
         >编辑</a>
+      </template>
+      <template slot="tableAction">
+        <div>
+          <a-button type="primary">导出</a-button>
+        </div>
       </template>
     </SelfTable>
   </div>
@@ -20,6 +31,7 @@ export default {
   data () {
     return {
       options: columns,
+      selectedRowKeys: [],
       tableData: {
         list: [
           { complainantName: 1, respondentName: '234321421452353535315', createTime: 'createTime', assignRegionName: '23412342352135321523152315231521355325', visitStatus: 1 },
@@ -39,7 +51,13 @@ export default {
     handleClick (record) {
       console.log(record)
     },
-    fetchData (pagination) {
+    onSelectChange (record, selected, selectedRows) {
+      console.log(record, selected, selectedRows)
+    },
+    onSelectAllChange (selected, selectedRows, changeRows) {
+      console.log(selected, selectedRows, changeRows)
+    },
+    fetchData (pagination, filters, sorter, currentDataSource) {
       setTimeout(() => {
         this.tableData.list = [
           { complainantName: 1, respondentName: '234321421452353535315', createTime: 'createTime', assignRegionName: '23412342352135321523152315231521355325', visitStatus: 1 },

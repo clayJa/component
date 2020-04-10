@@ -1,16 +1,18 @@
 <template>
   <div class="list">
     <a-table
-      :loading="loading"
-      :columns="columns"
-      @change="handleTableChange"
-      :pagination="pagination"
+      v-bind="$props"
+      :loading="selfLoading"
+      :columns="selfColumns"
+      @change="handleChange"
+      @expand="handleExpand"
+      :pagination="selfPagination"
       :dataSource="data.list"
       :rowKey="(record, index) => record.id || index"
       bordered
     >
       <!-- 序号 -->
-      <span slot="sn" slot-scope="text, record, index">{{(pagination.current - 1) * pagination.pageSize + index + 1}}</span>
+      <span slot="sn" slot-scope="text, record, index">{{(selfPagination.current - 1) * selfPagination.pageSize + index + 1}}</span>
       <!-- 提示 -->
       <template v-for="slot in slotNames" :slot="slot.name" slot-scope="text">
         <a-tooltip :key="slot.name" placement="topLeft">
@@ -25,23 +27,27 @@
           </span>
         </a-tooltip>
       </template>
-      <slot></slot>
     </a-table>
+    <div class="tableAction">
+      <slot name="tableAction"></slot>
+    </div>
   </div>
 </template>
 <script>
+import { Table } from 'ant-design-vue'
 import { formatTime } from '@/utils/commonFunc'
 export default {
   name: 'SelfTable',
   props: {
+    ...Table.props,
     options: Array,
     data: Object
   },
   data () {
     return {
       formatTime,
-      loading: false,
-      pagination: {
+      selfLoading: false,
+      selfPagination: {
         showQuickJumper: true,
         total: 50,
         current: 1,
@@ -79,12 +85,15 @@ export default {
       const overflowSlotNames = this.overflowSlotNames.map(item => ({ ...item, type: 'overflow' }))
       return [...defaultSlotNames, ...dateSlotNames, ...overflowSlotNames]
     },
-    columns () {
+    selfColumns () {
       const scopedSlots = Object.keys(this.$scopedSlots)
       const columns = [...this.options]
       scopedSlots.forEach(slot => {
         const slotColumn = this.noTooltipSlot.find(item => item.scopedSlots.customRender === slot)
-        columns.splice(slotColumn.index, 1, { ...slotColumn, customRender: this.$scopedSlots[slot] })
+        console.log(slotColumn, slot)
+        if (slotColumn) {
+          columns.splice(slotColumn.index, 1, { ...slotColumn, customRender: this.$scopedSlots[slot] })
+        }
       })
       return columns
     }
@@ -93,8 +102,8 @@ export default {
     data: {
       handler (val) {
         this.loading = false
-        this.pagination = {
-          ...this.pagination,
+        this.selfPagination = {
+          ...this.selfPagination,
           total: val.total,
           current: val.current,
           pageSize: val.pageSize
@@ -104,17 +113,22 @@ export default {
     }
   },
   methods: {
-    handleTableChange (pagination) {
+    handleChange (pagination, filters, sorter, { currentDataSource }) {
       this.loading = true
-      this.$emit('fetchData', pagination)
+      this.$emit('tableChange', pagination, filters, sorter, currentDataSource)
+    },
+    handleExpand (expanded, records) {
+      this.$emit('tableExpand', expanded, records)
     }
   }
 }
 </script>
-<style>
+<style lang="stylus" scoped>
 .list {
-  .status {
-    color: #1274ff;
+  position: relative;
+  .tableAction {
+    position: absolute;
+    bottom: 16px;
   }
   .complainantName {
     cursor: pointer;
