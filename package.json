@@ -11,7 +11,7 @@
   "dependencies": {
     "@form-create/iview": "^1.0.9",
     "ant-design-vue": "^1.3.4",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "d3": "^5.12.0",
     "highcharts": "^7.1.2",
     "highcharts-vue": "^1.3.5",
